@@ -528,7 +528,7 @@ class Proton:
         self.default_pfx_dir = self.path("files/share/default_pfx/")
         self.user_settings_file = self.path("user_settings.py")
         self.wine_bin = self.bin_dir + "wine"
-        self.wine64_bin = self.bin_dir + "wine64"
+        self.wine64_bin = self.bin_dir + "wine"
         self.wineserver_bin = self.bin_dir + "wineserver"
         self.dist_lock = FileLock(self.path("dist.lock"), timeout=-1)
         self.host_pe_arch = "x86_64-windows"
@@ -1655,6 +1655,7 @@ class Session:
         if "wined3d11" in self.compat_config:
             self.compat_config.add("wined3d")
 
+        self.check_environment("PROTON_USE_WOW64", "usewow64")
         if not self.check_environment("PROTON_USE_WINED3D", "wined3d"):
             self.check_environment("PROTON_USE_WINED3D11", "wined3d")
         self.check_environment("PROTON_DXVK_D3D8", "dxvkd3d8")
@@ -1675,6 +1676,9 @@ class Session:
         self.check_environment("PROTON_DISABLE_NVAPI", "disablenvapi")
         self.check_environment("PROTON_FORCE_NVAPI", "forcenvapi")
         self.check_environment("PROTON_HIDE_APU", "hideapu")
+
+        if "usewow64" in self.compat_config:
+            self.env["WINEARCH"] = "wow64"
 
         if "noesync" in self.compat_config:
             self.env.pop("WINEESYNC", "")
