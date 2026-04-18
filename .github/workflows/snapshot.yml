@@ -6,7 +6,6 @@ on:
     branches:
       - 'cachyos_*_*/main'
       - 'cachyos_*_*/dev'
-      - 'twintail_*_*/main'
 
 concurrency:
   group: ${{ github.ref_name }}
