@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - 'cachyos_*_*/main'
+      - 'twintail_*_*/main'
       - 'cachyos_*_*/dev'
 
 concurrency:
