@@ -6,6 +6,7 @@ on:
   push:
     tags:
       - 'cachyos-*-*-slr'
+      - 'twintail-*-*-slr'
 
 concurrency:
   group: ${{ github.ref_name }}
